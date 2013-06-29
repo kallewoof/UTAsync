@@ -25,9 +25,7 @@ extern BOOL ut_poll(int         timeout_seconds,// poll the given block asynchro
 
 #define ASYNC_POLL(to, pps, test) \
     ut_poll(to, pps, ^BOOL() { \
-        BOOL _the_results_ = test; \
-        NSLog(@"results for " #test " are: %@", _the_results_ ? @"YES" : @"NO"); \
-        return _the_results_; \
+        return test; \
     })
 
 // convenience macros with SenTest extension
