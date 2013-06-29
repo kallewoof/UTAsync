@@ -25,7 +25,7 @@ static inline void ut_free(async_t at)
 
 dispatch_block_t ut_async()
 {
-    async_t at = latest_at = malloc(sizeof(async_t));
+    async_t at = latest_at = malloc(sizeof(struct async_t));
     at->failed = NO;
     at->semaphore = dispatch_semaphore_create(0);
 
