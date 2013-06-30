@@ -45,11 +45,13 @@ BOOL ut_hold(int timeout_seconds)
     async_t at = latest_at;
     assert(at);
     NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:timeout_seconds];
+    NSTimeInterval cycle = 0.2;
     long r = 0;
     while ((r = dispatch_semaphore_wait(at->semaphore, DISPATCH_TIME_NOW)) && 
            [loopUntil timeIntervalSinceNow] > 0) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
-                                 beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.2]];
+                                 beforeDate:[NSDate dateWithTimeIntervalSinceNow:cycle]];
+        cycle += 0.1;
     }
     
     // success (from dispatch_semaphore_wait())
