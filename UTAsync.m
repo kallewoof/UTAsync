@@ -49,7 +49,7 @@ BOOL ut_hold(int timeout_seconds)
     while ((r = dispatch_semaphore_wait(at->semaphore, DISPATCH_TIME_NOW)) && 
            [loopUntil timeIntervalSinceNow] > 0) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
-                                 beforeDate:loopUntil];
+                                 beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.2]];
     }
     
     // success (from dispatch_semaphore_wait())
